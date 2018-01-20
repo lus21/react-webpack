@@ -4,19 +4,16 @@ class App extends React.Component {
     constructor(...args) {
         super(...args);
         this.state = {
-            counter: 0,
-            todos: [1, 2, 3, 4, 5]
+            counter: 0
         };
     }
     increment = () => {
-        console.log(this.state.counter);
-        console.log('this.state.counter');
-        this.setState({counter:this.state.counter+100})
+        this.setState({counter:this.state.counter+1})
     };
     render() {
         return (
             <div>
-                Hello Worldaaaaa22!!!
+                Hello World!!!
                 <p>{this.state.counter}</p>
                 <button onClick={this.increment}>Increment</button>
             </div>

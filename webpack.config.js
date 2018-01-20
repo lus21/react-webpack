@@ -13,7 +13,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 
 const config = {
-    entry: './main.js',
+    entry: './source/main.js',
     output: {
         path:'/',
         filename: 'index.js',
@@ -30,14 +30,30 @@ const config = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react-hmre', 'es2015', 'react', 'stage-0'], // 'react-hmre'
+                    presets: ['es2015', 'react', 'stage-0', 'react-hmre'], // 'react-hmre'
                     plugins: ['transform-class-properties', 'react-hot-loader/babel']
                 }
+            },
+            {
+                test: /\.less$/,
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings
+                }, {
+                    loader: "css-loader" // translates CSS into CommonJS
+                }, {
+                    loader: "less-loader" // compiles Less to CSS
+                }]
             }
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'Home',
+            inject: true,
+            template: './index.html'
+        }),
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ],
     // plugins: [HtmlWebpackPluginConfig]
 };
